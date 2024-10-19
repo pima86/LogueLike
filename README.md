@@ -1,20 +1,14 @@
 # LogueLike
 
-##### 001 ▶ [Background_Size_Control](https://github.com/pima86/Game_Asset/blob/main/Background_Size_Control/Bg_Size_Ct.cs) // 디스플레이 화면 사이즈에 맞춰 뒷배경의 사이즈를 조정
-##### 002 ▶ [Camera_Shake](https://github.com/pima86/Game_Asset/blob/main/Camera_Shake/Script.cs) // 카메라 흔들기
-##### 003 ▶ [Click with Drag](https://github.com/pima86/Game_Asset/tree/main/Click_With_Drag) // Image 개체의 EventTrigger에서 Click과 Drag를 같이 실행할 수 있도록 해줌
-##### 004 ▶ [Collider_Spawn](https://github.com/pima86/Game_Asset/blob/main/Collider_Spawn/Spawn.cs) // BoxCollider을 통해 랜덤좌표에 프리팹 객체를 소환
-##### 005 ▶ [Dmg_Tmp](https://github.com/pima86/Game_Asset/blob/main/Dmg_Tmp/Dmg_Control.cs) // TextMeshProUGUI를 오브젝트풀링을 통해 생성 및 사용
-##### 006 ▶ [Input_Drag_Move](https://github.com/pima86/Game_Asset/blob/main/Input_Drag_Move/Quarter_view_move.cs) // 마우스 우클릭 또는 터치를 통한 드래그로 유닛의 이동을 담당
-##### 007 ▶ [Money_Transform](https://github.com/pima86/Game_Asset/tree/main/Money_Transform) // UI에 표현하기 어려운 높은 숫자를 문자로 표현해주는 스크립트
-##### 008 ▶ [Monster_AI_Chasing](https://github.com/pima86/Game_Asset/tree/main/Monster%20AI%20Chasing) // Nav를 활용한 타겟의 추격 및 공격
+##### 001 ▶ [Camera](https://github.com/pima86/LogueLike/blob/main/Camera/TouchCam.cs) // 테스트 중인 기기에 적절한 함수를 호출하여 카메라의 이동, 줌인과 줌아웃을 조작합니다.
+##### 002 ▶ [Item](https://github.com/pima86/LogueLike/tree/main/Item) // 아이템과 장비를 구현한 스크립트입니다. 유저에게 보여지는 UI가 포함되어 있습니다.
+##### 003 ▶ [Object_Abstract](https://github.com/pima86/LogueLike/tree/main/Object_Abstract) // Mob과 Plable 개체가 공유하는 스크립트를 위해 작성된 코드입니다.
+##### 004 ▶ [Skill_Abstract](https://github.com/pima86/LogueLike/tree/main/Skill_Abstract) // 여러 스킬들을 하나의 Type으로 스크립트에서 사용하기 위해 작성된 코드입니다.
+##### 005 ▶ [TalkStory](https://github.com/pima86/LogueLike/blob/main/TalkStory/Personality.cs) // 처치, 대기, 행동 등 여러 상호작용에 대해 각 캐릭터별 대사를 저장하고 출력합니다.
+##### 006 ▶ [TileNavigation](https://github.com/pima86/LogueLike/blob/main/TileNavigation.cs) //  A* algorithm을 통해 Timemap 형태의 필드에서 최적의 루트를 획득하고 전송합니다.
 
 ## 환경
 
+URP2D
 Unity2D 2022.3.18f1
-
-Visual Studio
-
-## 사용한 기술
-
-A* algorithm, Tilemap, ObjectPooling, URP
+Visual Studio C#
