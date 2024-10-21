@@ -32,21 +32,21 @@ public abstract class ObjectInfo : MonoBehaviour
         set => plus_hp = value;
         get => maxHp + plus_hp;
     }
-    int plus_hp;
+    [HideInInspector] public int plus_hp;
 
     public int plusDamage 
     { 
         set => plus_dmg = value; 
         get => dmg + plus_dmg; 
     }
-    int plus_dmg;
+    [HideInInspector] public int plus_dmg;
 
     public int plusDefense
     {
         set => plus_defense = value;
         get => defense + plus_defense;
     }
-    int plus_defense;
+    [HideInInspector] public int plus_defense;
 
     [Header("기술")]
     public Skill_Frame[] skills;
@@ -78,67 +78,63 @@ public abstract class ObjectInfo : MonoBehaviour
     }
     #endregion
     #region HP
-    public float HP
+    public int HP
     {
         set
         {
-            int dmg = (int)(value - hp);
+            int dmg = value - hp;
 
-            //피해
+            //공격받은 경우
             if (dmg < 0)
             {
+                //방어력 계산
                 dmg += plusDefense;
-                if (dmg > 0)
+                if (dmg >= 0) dmg = -1;
+
+                //보호막 계산
+                if (Shield > 0)
                 {
-                    dmg = -1;
+                    if (Shield >= dmg * -1)
+                    {
+                        Shield += dmg;
+                        dmg = 0;
+                    }
+                    else
+                    {
+                        dmg += Shield;
+                        Shield = 0;
+                    }
                 }
-            }
-
-            //최대체력을 넘지 않도록
-            if (plusHP < value) value = plusHP;
-
-            //데미지 텍스트 출력
-            if (hp != 0)
-                TextPooling.Inst.DamageCall(dmg, transform.position);
-
-            //공격을 받음
-            if (Shield != 0 && dmg < 0)
-            {
-                if (Shield >= dmg * -1)
-                {
-                    Shield += dmg;
-                    dmg = 0;
-                }
-                else
-                {
-                    dmg += Shield;
-                    Shield = 0;
-                }
-            }
-
-            //혈액
-            if (dmg < 0)
-                SpreadTilemap.Inst.SpreadBloodTilemap(new Vector2Int(
-                                                      Mathf.RoundToInt(transform.position.x),
-                                                      Mathf.RoundToInt(transform.position.y)));
-
-            if (hp != value)
-            {
-                //체력바 갱신
                 hp += dmg;
 
-                HpSetting();
-
-                //사망
-                if (hp <= 0)
-                    StartCoroutine(Action_Dead());
+                //보호막 이후로도 피해를 입을 경우 혈액 장판 설치
+                if (dmg < 0)
+                    SpreadTilemap.Inst.SpreadBloodTilemap(new Vector2Int(
+                                                          Mathf.RoundToInt(transform.position.x),
+                                                          Mathf.RoundToInt(transform.position.y)));
             }
+            //회복인 경우
+            else
+            {
+                if (plusHP <= hp + dmg) hp = plusHP;
+                else hp += dmg;
+            }
+
+            //데미지 텍스트 출력
+            if (dmg != 0)
+                TextPooling.Inst.DamageCall(dmg, transform.position);
+
+            //파괴
+            if (hp <= 0)
+                StartCoroutine(Action_Dead());
+
+            HpSetting();
         }
         get
         {
             return hp;
         }
-    }public float hp;
+    }public int hp;
     #endregion
     #region Shield
     public int Shield
